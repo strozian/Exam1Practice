@@ -9,16 +9,16 @@ emphasized:
   -- animation (Problem 0c)
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.  September 2016.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Austin Strozier,.  September 2016.
+"""  #  : 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    test_problem0a()
-    test_problem0b()
+    # test_problem0a()
+    #  test_problem0b()
     test_problem0c()
 
 
@@ -164,7 +164,10 @@ def problem0a(n):
     #        Simply try a few examples to convince yourself of this.
     #        ASK FOR HELP if you do not understand this hint.
     # ------------------------------------------------------------------
-
+    if sum_of_digits(n)% 2 == 1:
+        return True
+    else:
+        return False
 
 def test_problem0b():
     """ Tests the   problem0b   function. """
@@ -228,7 +231,12 @@ def problem0b(n):
     #    **  use (call) the   is_prime   function that is DEFINED ABOVE.
     ####################################################################
     # ------------------------------------------------------------------
+    total = 0
+    for k in range(n-1):
+        if is_prime(k+2) == True:
+            total += 1
 
+    return total
 
 def test_problem0c():
     """ Tests the   problem0c  function. """
@@ -295,8 +303,18 @@ def problem0c(circle, n, window):
     #   renders with a half-second pause after rendering.
     ####################################################################
     # ------------------------------------------------------------------
+    circle.fill_color = 'blue'
+    circle.attach_to(window)
+    r = circle.radius
+    x = circle.center.x
+    y = circle.center.y
 
+    for k in range(n):
+        point = rg.Point(x+r*2*k, y)
+        circle2 = rg.Circle(point, r)
+        circle2.attach_to(window)
 
+    window.render(.5)
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------

@@ -2,8 +2,8 @@
 PRACTICE Test 1, problem 3.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.  September 2016.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Austin Strozier.  September 2016.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -97,6 +97,17 @@ def test_problem3a():
 
     window3.close_on_mouse_click()
 
+    window4 = rg.RoseWindow(500,500)
+    point = rg.Point(10, 10)
+    expected = 3
+    answer = problem3a(window4, point, 2)
+    print()
+    print('Test 4 expected:', expected)
+    print('       actual:  ', answer)
+
+    window4.close_on_mouse_click()
+
+
     # ------------------------------------------------------------------
     # TODO: 2 (continued).
     # Below this comment (or integrated with one of the above tests,
@@ -137,7 +148,7 @@ def problem3a(window, point, n):
         :type n:      int
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -145,7 +156,24 @@ def problem3a(window, point, n):
     #    DIFFICULTY:      7 or 8
     #    TIME ESTIMATE:   20 to 35 minutes.
     # ------------------------------------------------------------------
+    total = 0
+    for k in range(n):
+        y = point.y + 10*k
+        x = point.x + 20*k
+        top_point = rg.Point(x,y)
+        bot_point = rg.Point(x, y+50)
+        line = rg.Line(top_point, bot_point)
 
+        if 1+2*k <= 13:
+            line.thickness = 1 + 2*k
+            total = total + 1+2*k
+        else:
+            line.thickness = 13
+            total = total + 13
+
+        line.attach_to(window)
+        window.render()
+    return total
 
 def test_problem3b():
     """ Tests the   problem3b   function. """
@@ -214,7 +242,20 @@ def problem3b(m, point1):
     #    DIFFICULTY:      8 or 9
     #    TIME ESTIMATE:   20 to 30 minutes.
     # ------------------------------------------------------------------
+    win = rg.RoseWindow(400, 650)
+    x = point1.x
+    y = point1.y
+    total = 0
+    for k in range(m):
+        point2 = rg.Point(x,y+60*k)
+        value = 3+2*k
+        total += problem3a(win, point2, value)
 
+
+
+    win.render()
+    win.close_on_mouse_click()
+    return total
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
